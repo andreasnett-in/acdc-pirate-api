@@ -3,19 +3,13 @@ from tensorflow import keras
 import numpy as np
 import tensorflow as tf
 import os
+from PIL import Image
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, 'ResNet18_hue_2_at_30.keras')
 model = keras.models.load_model(filename)
 
 def predict(image):
-    img = tf.keras.utils.load_img(
-        "C:/prosjekter/POS-satellite-imagery-ml-model/archive/scenes/scenes/ships_3.png",
-        grayscale=False,
-        color_mode="rgb",
-        target_size=None,
-        interpolation="nearest",
-        keep_aspect_ratio=False,
-    )
+    img = Image.fromarray(image)
 
     offset = 10
 
