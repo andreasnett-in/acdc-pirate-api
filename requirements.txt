@@ -5,3 +5,7 @@ matplotlib
 Flask
 requests
 numpy
+Flask-SQLAlchemy
+sqlalchemy==2.0.3
+python-dotenv
+pyodbc

@@ -1,16 +1,23 @@
-from flask import Flask, request
+from flask import Flask, request, current_app
 from get_coords import get_coords, normalize_ais_coords
 from ais import setup_ais_token, get_ais_data
 from sentinel import setup_sentinel_token
 from model.entry import predict
 from random import randint
+from db import create_session
+from models import LatLongHasPirate
+from sqlalchemy import select
+
 
 app = Flask(__name__)
+
 def setup_config():
     app.config["ais_token"] = setup_ais_token()
     sentinel_oauth, sentinel_token = setup_sentinel_token()
     app.config["sentinel_token"] = sentinel_token
     app.config["sentinel_oauth"] = sentinel_oauth
+    app.config["db_session"] = create_session()
+
 setup_config()
 
 @app.route("/", methods=["GET"])
@@ -41,4 +48,15 @@ def do_predictions():
     for bbox in bboxes:
         results.append(([coord for coord in bbox].append(bbox[0])), predict(bbox))
     # store results
+    return "Done"
+
+@app.route("/get-area", methods=["POST"])
+def get_partitions():
+    _id = request.get_json()["id"]
+    db = current_app.config["db_session"]
+    sql = select(LatLongHasPirate).where(LatLongHasPirate.id == _id)
+    for instance in db.scalars(sql):
+        print(instance)
+    for instance in db.query(LatLongHasPirate).all():
+        print(instance)
     return "Done"
