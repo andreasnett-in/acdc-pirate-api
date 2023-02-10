@@ -4,6 +4,4 @@ requests-oauthlib
 matplotlib
 Flask
 requests
-io
 numpy
-random
