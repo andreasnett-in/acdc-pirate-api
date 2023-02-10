@@ -1,8 +1,5 @@
 from oauthlib.oauth2 import BackendApplicationClient
 from requests_oauthlib import OAuth2Session
-from PIL import Image
-import io
-import numpy as np
 
 CLIENT_SECRET = "N&QBU3+>R}AJLqGQ(Z7?lTJ<.b8efeaR[p@xEWxw"
 CLIENT_ID = "d03af2a2-acaa-40c8-b824-7eb237eca07e"
