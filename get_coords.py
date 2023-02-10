@@ -40,3 +40,15 @@ def get_coords():
         if not globe.is_land(lat_center, long_center):
             at_sea.append(entry)
     return at_sea
+
+
+def normalize_ais_coords(bbox):
+    ais_coords = []
+
+    long_start, lat_start, long_end, lat_end = bbox
+    ais_coords.append([lat_start, long_start])
+    ais_coords.append([lat_start, long_end])
+    ais_coords.append([lat_end, long_end])
+    ais_coords.append([lat_end, long_start])
+    ais_coords.append([lat_start, long_start])
+    return ais_coords
