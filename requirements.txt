@@ -3,3 +3,8 @@ oauthlib
 requests-oauthlib
 matplotlib
 Flask
+requests
+PIL
+io
+numpy
+random
