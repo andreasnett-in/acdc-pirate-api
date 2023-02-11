@@ -63,6 +63,16 @@ def get_partitions():
     }
     return instance_obj
 
+@app.route("/get-area/mock", methods=["POST"])
+def get_area_mock():
+    return {
+        "west": 10.628393,
+        "east": 10.763566,
+        "north": 59.902589,
+        "south": 59.874839,
+        "has_pirate": True
+    }
+
 @app.route("/check-if-pirate", methods=["POST"])
 def check_for_pirates():
     json = request.get_json()
