@@ -4,7 +4,7 @@ import numpy as np
 import os
 dirname = os.path.dirname(__file__)
 filename = os.path.join(dirname, 'ResNet18_hue_2_at_30.keras')
-model = keras.models.load_model(filename)
+# model = keras.models.load_model(filename)
 def predict(img):
     return 2
 # def predict(img):
