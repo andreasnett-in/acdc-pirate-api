@@ -1,3 +1,4 @@
+"""
 import cv2
 from tensorflow import keras
 import numpy as np
@@ -63,3 +64,4 @@ def predict(img):
                     b[i][j] = index
                     index = index + 1
     return(b.max() - 1)
+"""
