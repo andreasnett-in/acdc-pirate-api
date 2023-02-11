@@ -65,3 +65,5 @@ def predict(img):
                     index = index + 1
     return(b.max() - 1)
 """
+def predict(img):
+    return 1
