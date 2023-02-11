@@ -54,9 +54,12 @@ def do_predictions():
 def get_partitions():
     _id = request.get_json()["id"]
     db = current_app.config["db_session"]
-    sql = select(LatLongHasPirate).where(LatLongHasPirate.id == _id)
-    for instance in db.scalars(sql):
-        print(instance)
-    for instance in db.query(LatLongHasPirate).all():
-        print(instance)
-    return "Done"
+    instance = db.query(LatLongHasPirate).where(LatLongHasPirate.id == _id)[0]
+    instance_obj = {
+        "west": instance.west,
+        "east": instance.east,
+        "north": instance.north,
+        "south": instance.south,
+        "has_pirate": instance.has_pirate
+    }
+    return instance_obj
