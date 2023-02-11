@@ -6,7 +6,6 @@ from model.entry import predict
 from random import randint
 from db import create_session
 from models import LatLongHasPirate
-from sqlalchemy import select
 
 
 app = Flask(__name__)
@@ -55,6 +54,27 @@ def get_partitions():
     _id = request.get_json()["id"]
     db = current_app.config["db_session"]
     instance = db.query(LatLongHasPirate).where(LatLongHasPirate.id == _id)[0]
+    instance_obj = {
+        "west": instance.west,
+        "east": instance.east,
+        "north": instance.north,
+        "south": instance.south,
+        "has_pirate": instance.has_pirate
+    }
+    return instance_obj
+
+@app.route("/check-if-pirate", methods=["POST"])
+def check_for_pirates():
+    json = request.get_json()
+    lat = json["lat"]
+    long = json["long"]
+    db = current_app.config["db_session"]
+
+    instance = db.query(LatLongHasPirate).where(
+                     (LatLongHasPirate.west < long) &
+                     (LatLongHasPirate.east > long) &
+                     ( LatLongHasPirate.north < lat) &
+                     ( LatLongHasPirate.south > lat))[0]
     instance_obj = {
         "west": instance.west,
         "east": instance.east,
