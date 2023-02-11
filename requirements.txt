@@ -9,4 +9,3 @@ Flask-SQLAlchemy
 sqlalchemy==2.0.3
 python-dotenv
 pyodbc
-tensorflow==2.10
