@@ -1,7 +1,6 @@
 from urllib import parse
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-import pyodbc
 import os
 
 def create_session():

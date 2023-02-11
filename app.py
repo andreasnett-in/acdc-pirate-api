@@ -93,3 +93,18 @@ def check_for_pirates():
         "has_pirate": instance.has_pirate
     }
     return instance_obj
+
+@app.route("/all-pirates", methods=["GET"])
+def get_all_pirate_locations():
+    db = current_app.config["db_session"]
+    instances = db.query(LatLongHasPirate).where(LatLongHasPirate.has_pirate == True)
+    instance_objs = []
+    for instance in instances:
+        instance_objs.append({
+            "west": instance.west,
+            "east": instance.east,
+            "north": instance.north,
+            "south": instance.south,
+            "id": instance.id
+        })
+    return instance_objs
